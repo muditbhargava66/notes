@@ -13,9 +13,6 @@ export default ((opts?: Options) => {
     return (
       <footer class={`${displayClass ?? ""}`}>
         <hr />
-        <p>
-          Created with <a href="https://quartz.jzhao.xyz/">Quartz v{version}</a>, © {year}
-        </p>
         <ul>
           {Object.entries(links).map(([text, link]) => (
             <li>
@@ -23,6 +20,9 @@ export default ((opts?: Options) => {
             </li>
           ))}
         </ul>
+        <p>
+          Content by <a href="https://muditbhargava66.github.io" target="_blank">Mudit Bhargava</a>, website created with <a href="https://quartz.jzhao.xyz/" target="_blank">Quartz</a>, © {year}
+        </p>
       </footer>
     )
   }

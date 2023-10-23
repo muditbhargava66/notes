@@ -21,7 +21,7 @@ export default ((opts?: Options) => {
           ))}
         </ul>
         <p>
-          Content by <a href="https://muditbhargava66.github.io" target="_blank">Mudit Bhargava</a>, website created with <a href="https://quartz.jzhao.xyz/" target="_blank">Quartz</a>, © {year}
+          Content by <a href="https://github.com/muditbhargava66" target="_blank">Mudit Bhargava</a>, website created with <a href="https://quartz.jzhao.xyz/" target="_blank">Quartz</a>, © {year}
         </p>
       </footer>
     )

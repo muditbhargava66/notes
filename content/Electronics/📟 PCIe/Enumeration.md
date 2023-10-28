@@ -1,3 +1,5 @@
+## Simplified view on Enumeration
+
 #PCIe enumeration is the process of initializing communication between #PCIe devices. It involves discovery, configuration, and setup steps to enable seamless data transfer.
 
 1. Root Port Initiation ^Initiation

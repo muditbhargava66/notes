@@ -1,0 +1,77 @@
+# PCIe 6.0 FLIT Mode
+
+## FLIT Structure
+
+- A FLIT (Flow Control Unit) contains 256 bytes total.
+  
+- FLIT Payload - 236 bytes
+    - Carries transaction layer packet (TLP) data
+    - Can contain partial TLPs or multiple small TLPs
+    - TLPs can span across multiple FLIT payloads if larger than 256 bytes
+
+- Data Link Layer Packet (DLLP) - 6 bytes
+    - Control and management channel for PCIe data link layer
+    - Used for link management, flow control credits, ACK/NAK signaling
+    - Ensures reliable data exchange between PCIe devices
+
+- Forward Error Correction (FEC) - 6 bytes
+    - Provides error detection and correction capabilities
+    - Enables recovery from bit errors introduced during transmission
+    - Uses redundant parity check bits to reconstruct corrupted data
+
+- Cyclic Redundancy Check (CRC) - 8 bytes
+    - Detects accidental changes to data using checksums
+    - CRC calculated before transmission and checked after receipt
+    - Any mismatches indicate data corruption during transmission
+
+> **Note** : When these components are combined, they form a single FLIT. The payload carries the actual data, while the DLLP, FEC, and CRC sections provide control, error detection, and error correction functionalities, respectively. This structured approach ensures reliable and efficient data transmission in PCIe Gen 6.
+## FLIT Flow Control
+
+- Each FLIT contains 2 bytes for ACK/NAK signaling
+- Recipient ACKs latest sequence number to confirm multiple FLITs
+- Ensures efficient reliable delivery without added latency
+
+## FLIT and TLP Relationship
+
+- TLP boundaries are independent of FLIT boundaries
+- Large TLPs span multiple FLITs if exceeding 256 byte FLIT payload
+- Small TLPs aggregate together into one FLIT
+
+## Motivation for 256 Byte FLIT
+
+- Higher FLIT sizes like 740 bytes improve efficiency but increase latency significantly.
+- Lower FLIT sizes like 64 bytes reduce latency marginally.
+- 256 bytes chosen as optimal balance between efficiency and latency.
+
+## Unused FLIT Space
+
+- Unused space in a FLIT is filled by next TLP, not NOPs.
+- A FLIT is padded with NOPs only if no TLP available.
+
+# PCIe 6.0 PAM4 Signaling
+
+## PAM4 Encoding
+
+- Uses 4 amplitude levels to encode 2 bits per symbol instead of 1 bit.
+- Doubles the data rate compared to binary signaling without increasing frequency.
+
+## PAM4 Bandwidth
+
+- Enables 32 GT/s link speed using 16 GHz signaling rate.
+- Legacy NRZ encoding would require 32 GHz signaling for same speed.
+
+## PAM4 Complexity
+
+- PAM4 transceivers have higher complexity than binary transceivers.
+- Requires advanced DSP techniques for equalization and decoding.
+
+## PAM4 Reliability
+
+- Susceptible to noise due to smaller voltage differences between levels.
+- Overcomes this using FEC and advanced channel modeling.
+
+
+-----
+## Reference
+
+[The below Blog has Few common questions on Flit mode.](https://pcisig.com/blog/pcie%C2%AE-60-specification-webinar-qa-deeper-dive-flit-mode-pam4-and-forward-error-correction-fec)

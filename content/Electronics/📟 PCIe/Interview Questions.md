@@ -1,0 +1,78 @@
+# What's is enumeration in PCIe specific the role of root port, Switches and end point ? 
+
+#PCIe [enumeration](Simplified%20view%20on%20Enumeration.md) is the process by which the system discovers and configures all the PCIe devices connected to the system. During enumeration, the system firmware and operating system work together to identify PCIe devices, assign resources, and establish communication between devices. Here's the specific role of root ports, switches, and endpoints in PCIe enumeration:  
+
+1. Root Port: 
+	   - [Identification](Simplified%20view%20on%20Enumeration.md#^Identification): Root ports are PCIe interfaces integrated into the motherboard's chipset or CPU. They act as primary connections between the CPU/memory subsystem and the PCIe fabric.
+	   - [Enumeration](Simplified%20view%20on%20Enumeration.md):Root ports initiate the enumeration process by sending configuration read requests to PCIe devices connected to them. They read the Device ID and Vendor ID registers to identify connected devices. 
+	   - Configuration: Root ports configure various parameters such as base address registers (BARs), interrupt settings, and maximum payload sizes during the enumeration process.
+
+2. Switches:    
+	- Connectivity: PCIe switches are used to expand the number of available PCIe lanes and ports. They act as intermediaries between multiple PCIe devices, allowing them to communicate with each other.
+	- Routing: Switches facilitate routing of enumeration requests between root ports and endpoint devices. They ensure that configuration read and write requests reach the appropriate destination devices.
+	- Enumeration Cascade: Switches can further connect to other switches or endpoint devices, creating a cascade of PCIe devices. Each switch in the cascade participates in the enumeration process for its downstream devices.  
+
+3. Endpoint Devices:   
+	- Response to Configuration Requests: Endpoint devices respond to configuration read requests sent by root ports. They provide information stored in their configuration space, including Device ID, Vendor ID, Class Code, and other capabilities.
+	- Configuration:Endpoints can be multifunction devices, each function with its configuration space. During enumeration, each function is identified, and its configuration is established.
+	- [Data Transfer](Simplified%20view%20on%20Enumeration.md#^Data-transfer): Once configured, endpoints can engage in data transfers with the rest of the system, using the allocated resources such as memory-mapped spaces (BARs) and interrupts.
+
+The root ports initiate the enumeration process by querying connected devices, switches route configuration requests between root ports and endpoint devices, and endpoints respond to these requests and establish the necessary configuration for subsequent data transfers. The process ensures that all PCIe devices in the system are identified, configured, and ready for communication.
+
+
+# What's the  register written during pcie enumeration ? 
+
+During PCIe enumeration, the root complex (root port) communicates with PCIe endpoint devices to identify and configure them. The enumeration process involves several types of requests and transactions:  
+
+1. Configuration Read Requests: The root complex sends configuration read requests to the PCIe endpoints. These requests are used to read the configuration space of the endpoint devices, including Device ID, Vendor ID, Class Code, and other configuration registers. The root complex uses these responses to identify the connected devices and their capabilities.
+2. Configuration Write Requests: Configuration write requests are sent by the root complex to configure certain registers within the endpoint devices. This includes setting up Base Address Registers (BARs) and other configuration parameters required for communication between the root complex and the endpoint devices.
+3. Memory and I/O Transactions: Once the root complex has identified the connected devices and configured necessary parameters, it can initiate memory and I/O transactions with the endpoints. These transactions involve reading from or writing to the memory or I/O space of the endpoint devices. Memory transactions are typically used for data transfers between the host system and the endpoint's memory, while I/O transactions are used for communication with specific I/O registers on the endpoint devices.
+4. Interrupt Configuration: During enumeration, the root complex may also configure interrupt-related settings in the endpoint devices. This includes setting up interrupt pin and interrupt line values, enabling or disabling interrupts, and configuring interrupt routing mechanisms.
+5. Power Management Configuration: PCIe supports various power management features. During enumeration, the root complex may configure power-related settings in the endpoint devices, such as enabling or disabling power-saving modes and determining power management policies.  
+
+These requests and transactions are part of the PCIe enumeration process, allowing the root complex to identify, configure, and establish communication with the connected endpoint devices in the system.
+
+
+# Can you specify what's type of requests are sent during enumeration from root port to end point ? 
+
+During the PCIe enumeration process, several configuration registers in the PCIe devices are accessed and configured. Here are the key registers involved in the enumeration process:  
+1. Device ID and Vendor ID Registers: These registers identify the device and vendor of the PCIe device. The Device ID and Vendor ID are used by the system to recognize the device and load the appropriate drivers.  
+2. Class Code Register: This register indicates the class of the device (e.g., storage controller, network controller) and its subclass. It helps the system understand the type and purpose of the device.  
+3. Header Type Register: This register specifies the layout of the configuration registers in the device. It indicates whether the device has a single header or multiple headers (for multifunction devices).  
+4. Base Address Registers (BARs): BARs specify the memory-mapped or I/O space addresses used by the device for communication. During enumeration, these registers are configured to set up the device's address spaces. 
+5. Interrupt Line and Interrupt Pin Registers: These registers configure interrupt settings for the device. Interrupt Line indicates the interrupt line number used by the device, while Interrupt Pin specifies the interrupt pin that the device uses.  
+6. Command and Status Registers: The Command register is used to enable or disable memory and I/O access, as well as bus mastering. The Status register contains various status bits, including whether the device is ready for operation.  
+7. Capabilities Pointer Register: This register points to the first capability structure in the PCIe device's extended capabilities list. PCIe devices can have various extended capabilities that provide additional features and configuration options.  
+8. Power Management Control and Status Registers: These registers are used to configure power management settings, such as enabling or disabling power-saving modes.  
+9. Link Control and Status Registers: These registers manage the link between PCIe devices, specifying link speed and width. Configuring these registers ensures optimal communication between devices. 
+
+During enumeration, the system firmware and operating system read from and write to these registers to identify connected devices, configure necessary settings, and establish communication with the PCIe devices in the system. 
+
+
+# Let's assume I have 5 end point. each end point has different mps how will the root port come to know the Generation of PCIe and max payload support ? 
+
+The PCIe specification includes a mechanism for devices to negotiate their capabilities, including the ==maximum payload size (MPS)== and the PCIe generation they support. During the enumeration process, the root port can determine the generation of PCIe and the maximum payload size supported by each endpoint through the following methods: 
+
+1. Device Capability Structure:
+
+   PCIe devices include a Capability structure within their configuration space.  
+   The PCI Express Capability Structure contains information about the device's capabilities, including supported PCIe generation and maximum payload size. 
+   The root port can read this structure to determine the PCIe generation supported (e.g., PCIe Gen 3, PCIe Gen 4, etc.) and the maximum payload size supported by the endpoint device.
+
+2. Negotiation and Link Training:
+
+   During the link training process, the root port and the endpoint negotiate the link parameters, including supported PCIe generation and MPS. 
+   The endpoints and root port exchange information about their capabilities and agree on the highest common PCIe generation and MPS that both devices support. 
+   Link training includes negotiation steps where both devices exchange training sequences to establish a stable connection with agreed-upon parameters.
+
+4. BIOS/UEFI Settings:
+   
+   The system BIOS/UEFI firmware may contain settings to configure PCIe parameters, including maximum payload size.     
+   These settings can be used to specify the preferred or maximum allowed MPS for specific endpoints, which the root port will adhere to during enumeration.  
+
+4. Operating System Configuration:
+   
+   The operating system, during its initialization process, can query the PCIe devices and read their capabilities.  
+   The OS can use PCIe configuration space access methods to determine the generation and MPS supported by each endpoint. 
+
+By utilizing these methods, the root port can identify the PCIe generation and maximum payload size supported by each endpoint device during the enumeration process, ensuring optimal configuration and communication within the PCIe network. 

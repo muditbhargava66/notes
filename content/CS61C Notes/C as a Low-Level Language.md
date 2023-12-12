@@ -1,0 +1,14 @@
+- - C language history:
+    - Developed by Dennis Ritchie and Ken Thompson
+    - Designed for OS and systems development (UNIX)
+    - Provides excellent control over hardware resources
+    - Established many programming paradigms still used today
+
+- Low-level languages expose hardware details vs high-level languages which hide them
+- Benefits:
+    - Performance - optimize code for hardware
+    - Control - directly manage hardware resources
+- Downsides:
+    - Portability - hardware-dependent code doesn't transfer well
+    - Productivity - more verbose, focus on hardware not problem
+- C is excellent for OS and compiler development by providing good control over hardware

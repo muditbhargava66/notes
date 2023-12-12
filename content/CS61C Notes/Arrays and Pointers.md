@@ -1,0 +1,8 @@
+- Arrays consist of contiguous memory allocated for elements
+- Pointers contain memory addresses as unsigned integers
+- Pointer arithmetic factors in size of data type
+- Array access is converted by compiler to pointer arithmetic
+- Matrices can be represented as array of arrays
+- Data structures like linked lists use pointers between elements
+- Dynamic memory allocation returns a pointer to allocated memory
+- Can simulate pass-by-reference with pointers as function arguments

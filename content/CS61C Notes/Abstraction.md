@@ -1,0 +1,11 @@
+- Abstraction enables greater complexity and generality in hardware and software
+- It involves hiding implementation details behind interfaces
+- Moving tasks from hardware to software increases abstraction
+	- Number representations
+	- Character encoding schemes
+	- Floating point math
+	- Graphics rendering
+	- Encryption/decryption
+    - e.g. number representations moved from hardware circuits to software libraries
+    - Abstracting these tasks in software increases flexibility and portability
+- Higher levels of abstraction allow focusing more on the problem vs the hardware

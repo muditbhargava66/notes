@@ -1,0 +1,7 @@
+- `extern`: variable/function defined externally
+- `static` :
+    - In global scope: limits visibility to file scope
+    - In local scope: gives variable static storage duration
+    - Use `static` sparingly in large programs:
+	    - Creates tight coupling between modules
+	    - Increases complexity to reason about state

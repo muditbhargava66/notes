@@ -21,6 +21,7 @@ export const defaultContentPageLayout: PageLayout = {
   ],
   left: [
     Component.Search(),
+    Component.Darkmode(),
     Component.DesktopOnly(Component.Explorer({
         sortFn: (a, b) => {
             if ((!a.file && !b.file) || (a.file && b.file)) {
@@ -47,7 +48,8 @@ export const defaultListPageLayout: PageLayout = {
   beforeBody: [Component.ArticleTitle()],
   left: [
     Component.Search(),
-    Component.DesktopOnly(Component.Explorer({
+    Component.Darkmode(),
+    /*Component.DesktopOnly(Component.Explorer({
         sortFn: (a, b) => {
             if ((!a.file && !b.file) || (a.file && b.file)) {
               // Remove non-alphanumeric except for spaces and dashes
@@ -59,7 +61,7 @@ export const defaultListPageLayout: PageLayout = {
               return 1
             }
           },
-    })),
+    })),*/
   ],
   right: [],
 }

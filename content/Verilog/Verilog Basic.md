@@ -1,0 +1,69 @@
+## Introduction to Verilog HDL
+
+- Verilog modules defined using:
+    ```verilog
+    module <module_name> (<port_list>);
+    <signal_declarations> 
+    <functionality>
+    endmodule
+    ```
+
+- Example module:
+    ```verilog
+    module smpl_circuit(A,B,C,x,y);
+    input A,B,C;
+    output x,y;
+    wire e;
+    
+    and g1(e,A,B); 
+    not g2(y,C);
+    or g3(x,e,y);
+    
+    endmodule
+    ```
+
+## Verilog Keywords and Syntax 
+
+- Comments use `//`
+- About 100 keywords, case sensitive
+- Key keywords:
+    - `module`: Building block 
+    - `endmodule`: Ends module definition
+    - `input`: Input ports
+    - `output`: Output ports
+    - `wire`: Internal connections
+
+## Verilog Statements 
+
+- **Concurrent** (combinational): Execute concurrently
+    - Gate instances
+    - Continuous assignments with `assign`  
+- **Procedural** (sequential): Execute in order 
+    - Always blocks with `always` 
+    - Initial blocks with `initial`
+    - If-else statements
+
+## Modeling Gates
+
+- Gates instantiated by name, connected with `wire`s 
+- Example:
+    ```verilog
+    and g1(out, in1, in2);
+    or g2(out2, out, in3); 
+    ```
+
+- Delays specified using `#()` 
+    - For **simulation only**
+
+## Initial Test Benches 
+
+- Stimulus applied to test module:
+    ```verilog
+    reg [inputs]
+    initial begin
+        // apply input patterns
+        $finish; // end simulation
+    end
+    ```
+
+- Generates waveforms to verify functionality

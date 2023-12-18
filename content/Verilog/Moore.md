@@ -1,0 +1,31 @@
+# Moore Finite State Machines 
+
+In a Moore FSM, the output depends **only on the current state**:
+
+- The output logic is purely a function of the current state.
+- Transitions between states take place on clock edges based on inputs.
+- But output is associated only with the state itself.
+
+**Advantages:**
+
+- Output is synchronized with the clock 
+
+**Disadvantages:** 
+
+- State explosion if designing complex systems
+
+**Example Moore FSM module template:**
+
+```verilog 
+reg [state reg]
+parameter [state encodings]
+
+always @(posedge clk)  
+    case (state)
+       // state transitions
+    endcase
+
+assign output = f(state);
+```
+
+So in summary, Moore FSM outputs are a function of just the present state, leading to synchronized transitions but potentially more states.

@@ -22,6 +22,7 @@ export const defaultContentPageLayout: PageLayout = {
   left: [
     Component.Search(),
     Component.Darkmode(),
+    
     Component.DesktopOnly(Component.Explorer({
         sortFn: (a, b) => {
             if ((!a.file && !b.file) || (a.file && b.file)) {
@@ -37,6 +38,7 @@ export const defaultContentPageLayout: PageLayout = {
     })),
   ],
   right: [
+    Component.MobileOnly(Component.Explorer()),
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Backlinks(),
     Component.Graph(),
@@ -49,7 +51,8 @@ export const defaultListPageLayout: PageLayout = {
   left: [
     Component.Search(),
     Component.Darkmode(),
-    /*Component.DesktopOnly(Component.Explorer({
+    Component.MobileOnly(Component.Explorer()),
+    Component.DesktopOnly(Component.Explorer({
         sortFn: (a, b) => {
             if ((!a.file && !b.file) || (a.file && b.file)) {
               // Remove non-alphanumeric except for spaces and dashes
@@ -61,7 +64,9 @@ export const defaultListPageLayout: PageLayout = {
               return 1
             }
           },
-    })),*/
+    })),
   ],
-  right: [],
+  right: [
+  
+  ],
 }

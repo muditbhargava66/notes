@@ -4,18 +4,19 @@ title: Welcome! 👋
 
 I am Mudit Bhargava, a graduate student pursuing M.S. in Electrical and Computer Engineering at New York University (NYU). I have over 3 years of experience working on embedded systems, robotics, and hardware security research.
 
-## Education
+## <span style="color:#00b0f0">Education</span>
 
 - **M.S. Electrical and Computer Engineering, New York University (2021-2023)**
     
-    Courses: Computer Architecture, VLSI, DSP, Analog IC Design, Hardware Security
+    Courses: Computer Architecture, VLSI, DSP, Analog IC Design, Hardware Security, Reinforcement
+     learning.
     
 - **B.Tech Mechatronics, SRM Institute of Science and Technology (2017-2021)**
     
     Courses: Data Structures, Sensors, Microprocessors, Embedded Systems, Mobile Robotics
     
 
-## Skills
+## <span style="color:#00b0f0">Skills</span>
 
 - **Languages:** Verilog, SystemVerilog, VHDL, Python, C/C++, Go, Perl
 - **Tools:** Synopsys, Cadence, Mentor, Xilinx
@@ -23,7 +24,7 @@ I am Mudit Bhargava, a graduate student pursuing M.S. in Electrical and Computer
 - **Protocols:** AXI, AMBA, PCIe, Ethernet, SPI, I2C
 - **Platforms:** Linux, Arduino, FreeRTOS, Raspberry Pi, Xilinx, Nvidia
 
-## Experience
+## <span style="color:#00b0f0">Experience</span>
 
 - **NYU Center for Cyber Security (2022-2023)**
     - Hardware trojan research

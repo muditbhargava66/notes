@@ -14,7 +14,7 @@
 - Provide debugging capability for lab testing
 - Support design stability with regression testing
 
-## **Planning:**
+### **Planning:**
 
 - [[Verification Stages]]
 - [[Test Scenarios]]
@@ -35,7 +35,7 @@
 
 - **Signal-level:** Drivers, responders, monitors, checkers
 - **Transaction-level:** Scoreboards, checkers, transactors
-
+### Others
 - [[Testbench Transactions]]
 - [[Testbench Patterns]]
 - [[Common Testbench Support]]
@@ -53,6 +53,7 @@
 - Input transactions => expected output transactions
 - Constantly compare expected vs actual
 
+### Others
 - [[Functional Coverage]]
 - [[Assertions]]
 - [[Simulation Debugging]]

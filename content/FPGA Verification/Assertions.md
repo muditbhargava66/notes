@@ -1,0 +1,8 @@
+- Statements about expected behavior
+- Checked in simulation runtime
+- Example types:
+    - Implication
+    - Sequential implication
+    - One-hot checks
+- Bind into RTL or testbench
+- Connect to central error tracking

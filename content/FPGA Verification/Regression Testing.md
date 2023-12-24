@@ -1,0 +1,8 @@
+- Maintain stability in development
+- Automated runs on test suites
+- Merge results for tracking
+- Implement with scripts:
+    - Run tests in batches
+    - Collect statuses
+    - Merge coverage
+    - Report summary

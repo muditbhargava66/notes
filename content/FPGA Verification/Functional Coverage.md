@@ -1,0 +1,7 @@
+- Measures exercised features in simulation
+- Defined covergroups in SystemVerilog
+- Cover cross and illegal combinations
+- Bins for state transitions
+- Generate coverage reports
+- Merge results from tests
+- Rank tests based on coverage

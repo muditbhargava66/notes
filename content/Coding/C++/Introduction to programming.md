@@ -12,7 +12,7 @@ C++ is a compiled, statically typed, general-purpose [[#Programming Languages|pr
 ### Source code
 A computer program in its human-readable form is called **source code**.
 Source code example:
-```C++
+```cpp
 include<iostream>
 using namespace std;
 

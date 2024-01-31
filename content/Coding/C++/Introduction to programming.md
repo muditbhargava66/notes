@@ -1,0 +1,35 @@
+Introduction to computer programming: CPU help is processing the computer program.
+
+## Programming Languages 
+
+We need language to communicate with a computer too! A ==[[#Computer Program/Application|computer program]]== is a set of instructions written in a programming language that tells a computer what tasks to perform. 
+Programming language are set of rules that consist of instructions for computers. There are many programming languages like [[#C++]], Java, [[#Python|python]], JavaScript, Go, [[Verilog Basic|Verilog]] etc.
+### Python 
+Python is a high-level, general-purpose [[#Programming Languages|programming language]]. It emphasizes code readability using significant indentation.
+### C++ 
+C++ is a compiled, statically typed, general-purpose [[#Programming Languages|programming language]] supporting multiple paradigms. It has imperative, object-oriented and generic programming features.
+
+### Source code
+A computer program in its human-readable form is called **source code**.
+Source code example:
+```C++
+include<iostream>
+using namespace std;
+
+int main(){
+	//your code goes here
+	cout << "Hello World";
+	return 0;
+}
+```
+
+**Source code** needs another computer program to execute because computers can only execute their native machine instructions.
+Therefore, Source code may be translated to machine instructions using the language's [[Environment Setup#^compiler| compiler]].
+
+**Machine language** is a set of instructions executed directly by a computer's central processing unit (CPU). Each instruction performs a very specific task, such as a load, a jump, or an ALU operation on a unit of data in a CPU register or memory. Every program directly executed by a <u>CPU is made of a series of such instructions.</u>
+
+**Program Execution**
+When a program starts executing, then the **operating system** loads it into memory and starts a process. The CPU starts executing the instructions written in the program and any required data is also loaded into memory (RAM).
+
+
+

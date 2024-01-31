@@ -1,0 +1,53 @@
+The C++ development environment consists of:
+
+- A text editor to write C++ code
+- A compiler to convert code into an executable
+- Tools to run and debug the executable
+
+## Editors
+
+Popular editors for C++ include:
+
+- [Visual Studio Code](https://code.visualstudio.com/download) - Free, open-source, extensions available
+- Xcode (Mac only)
+- CLion - Paid
+
+## Compilers ^compiler
+
+The most common C++ compilers are:
+- g++ (Linux & Mac)
+- MinGW (Windows)
+- Visual C++ (Windows)
+
+Compilers convert C++ source code into machine code the computer can run.
+
+To compile with g++ on command line:
+
+```
+g++ myProgram.cpp -o myProgram
+```
+
+> [!NOTE]
+> The `-o` flag names the output executable file.
+
+## Local IDE
+
+An integrated development environment (IDE) is software for building applications that combines common developer tools into a single graphical user interface (GUI).
+
+IDE is a software that allows you to **create, edit, run, test & debug** your code from a single GUI.
+
+## Absolute vs Relative Paths
+
+Absolute path specifies the full location of a file or folder from the root of the file system. For example:
+
+```
+/User/name/Documents/program.cpp
+```
+
+A relative path specifies the location relative to the current working directory. For example, if you are already in the Documents folder:
+
+```
+program.cpp
+```
+
+Using the correct path is important when accessing files from terminals or code.

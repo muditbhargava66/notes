@@ -1,5 +1,5 @@
 import { QuartzTransformerPlugin } from "../types"
-import { Root, Html, Image, BlockContent, DefinitionContent, Paragraph, Code } from "mdast"
+import { Root, Html, BlockContent, DefinitionContent, Paragraph, Code } from "mdast"
 import { Element, Literal, Root as HtmlRoot } from "hast"
 import { ReplaceFunction, findAndReplace as mdastFindReplace } from "mdast-util-find-and-replace"
 import { slug as slugAnchor } from "github-slugger"
@@ -23,6 +23,7 @@ export interface Options {
   callouts: boolean
   mermaid: boolean
   parseTags: boolean
+  parseArrows: boolean
   parseBlockReferences: boolean
   enableInHtmlEmbed: boolean
   enableYouTubeEmbed: boolean
@@ -36,6 +37,7 @@ const defaultOptions: Options = {
   callouts: true,
   mermaid: true,
   parseTags: true,
+  parseArrows: true,
   parseBlockReferences: true,
   enableInHtmlEmbed: false,
   enableYouTubeEmbed: true,
@@ -106,22 +108,25 @@ const calloutMapping: Record<string, keyof typeof callouts> = {
 
 function canonicalizeCallout(calloutName: string): keyof typeof callouts {
   let callout = calloutName.toLowerCase() as keyof typeof calloutMapping
-  return calloutMapping[callout] ?? "note"
+  // if callout is not recognized, make it a custom one
+  return calloutMapping[callout] ?? calloutName
 }
 
 export const externalLinkRegex = /^https?:\/\//i
 
-// !?               -> optional embedding
-// \[\[             -> open brace
-// ([^\[\]\|\#]+)   -> one or more non-special characters ([,],|, or #) (name)
-// (#[^\[\]\|\#]+)? -> # then one or more non-special characters (heading link)
-// (|[^\[\]\|\#]+)? -> | then one or more non-special characters (alias)
+export const arrowRegex = new RegExp(/-{1,2}>/, "g")
+
+// !?                -> optional embedding
+// \[\[              -> open brace
+// ([^\[\]\|\#]+)    -> one or more non-special characters ([,],|, or #) (name)
+// (#[^\[\]\|\#]+)?  -> # then one or more non-special characters (heading link)
+// (\|[^\[\]\#]+)? -> | then one or more non-special characters (alias)
 export const wikilinkRegex = new RegExp(
-  /!?\[\[([^\[\]\|\#]+)?(#+[^\[\]\|\#]+)?(\|[^\[\]\|\#]+)?\]\]/,
+  /!?\[\[([^\[\]\|\#]+)?(#+[^\[\]\|\#]+)?(\|[^\[\]\#]+)?\]\]/,
   "g",
 )
 const highlightRegex = new RegExp(/==([^=]+)==/, "g")
-const commentRegex = new RegExp(/%%(.+)%%/, "g")
+const commentRegex = new RegExp(/%%[\s\S]*?%%/, "g")
 // from https://github.com/escwxyz/remark-obsidian-callout/blob/main/src/index.ts
 const calloutRegex = new RegExp(/^\[\!(\w+)\]([+-]?)/)
 const calloutLineRegex = new RegExp(/^> *\[\!\w+\][+-]?.*$/, "gm")
@@ -130,9 +135,12 @@ const calloutLineRegex = new RegExp(/^> *\[\!\w+\][+-]?.*$/, "gm")
 // (?:[-_\p{L}\d\p{Z}])+       -> non-capturing group, non-empty string of (Unicode-aware) alpha-numeric characters and symbols, hyphens and/or underscores
 // (?:\/[-_\p{L}\d\p{Z}]+)*)   -> non-capturing group, matches an arbitrary number of tag strings separated by "/"
 const tagRegex = new RegExp(/(?:^| )#((?:[-_\p{L}\p{Emoji}\d])+(?:\/[-_\p{L}\p{Emoji}\d]+)*)/, "gu")
-const blockReferenceRegex = new RegExp(/\^([A-Za-z0-9]+)$/, "g")
+const blockReferenceRegex = new RegExp(/\^([-_A-Za-z0-9]+)$/, "g")
 const ytLinkRegex = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/
 const videoExtensionRegex = new RegExp(/\.(mp4|webm|ogg|avi|mov|flv|wmv|mkv|mpg|mpeg|3gp|m4v)$/)
+const wikilinkImageEmbedRegex = new RegExp(
+  /^(?<alt>(?!^\d*x?\d*$).*?)?(\|?\s*?(?<width>\d+)(x(?<height>\d+))?)?$/,
+)
 
 export const ObsidianFlavoredMarkdown: QuartzTransformerPlugin<Partial<Options> | undefined> = (
   userOpts,
@@ -147,6 +155,15 @@ export const ObsidianFlavoredMarkdown: QuartzTransformerPlugin<Partial<Options> 
   return {
     name: "ObsidianFlavoredMarkdown",
     textTransform(_ctx, src) {
+      // do comments at text level
+      if (opts.comments) {
+        if (src instanceof Buffer) {
+          src = src.toString()
+        }
+
+        src = src.replace(commentRegex, "")
+      }
+
       // pre-transform blockquotes
       if (opts.callouts) {
         if (src instanceof Buffer) {
@@ -208,10 +225,10 @@ export const ObsidianFlavoredMarkdown: QuartzTransformerPlugin<Partial<Options> 
                   const ext: string = path.extname(fp).toLowerCase()
                   const url = slugifyFilePath(fp as FilePath)
                   if ([".png", ".jpg", ".jpeg", ".gif", ".bmp", ".svg", ".webp"].includes(ext)) {
-                    const dims = alias ?? ""
-                    let [width, height] = dims.split("x", 2)
-                    width ||= "auto"
-                    height ||= "auto"
+                    const match = wikilinkImageEmbedRegex.exec(alias ?? "")
+                    const alt = match?.groups?.alt ?? ""
+                    const width = match?.groups?.width ?? "auto"
+                    const height = match?.groups?.height ?? "auto"
                     return {
                       type: "image",
                       url,
@@ -219,6 +236,7 @@ export const ObsidianFlavoredMarkdown: QuartzTransformerPlugin<Partial<Options> 
                         hProperties: {
                           width,
                           height,
+                          alt,
                         },
                       },
                     }
@@ -282,13 +300,13 @@ export const ObsidianFlavoredMarkdown: QuartzTransformerPlugin<Partial<Options> 
             ])
           }
 
-          if (opts.comments) {
+          if (opts.parseArrows) {
             replacements.push([
-              commentRegex,
+              arrowRegex,
               (_value: string, ..._capture: string[]) => {
                 return {
-                  type: "text",
-                  value: "",
+                  type: "html",
+                  value: `<span>&rarr;</span>`,
                 }
               },
             ])
@@ -304,7 +322,7 @@ export const ObsidianFlavoredMarkdown: QuartzTransformerPlugin<Partial<Options> 
                 }
 
                 tag = slugTag(tag)
-                if (file.data.frontmatter && !file.data.frontmatter.tags.includes(tag)) {
+                if (file.data.frontmatter?.tags?.includes(tag)) {
                   file.data.frontmatter.tags.push(tag)
                 }
 
@@ -418,7 +436,7 @@ export const ObsidianFlavoredMarkdown: QuartzTransformerPlugin<Partial<Options> 
                   value: `<div
                   class="callout-title"
                 >
-                  <div class="callout-icon">${callouts[calloutType]}</div>
+                  <div class="callout-icon">${callouts[calloutType] ?? callouts.note}</div>
                   <div class="callout-title-inner">${title}</div>
                   ${collapse ? toggleIcon : ""}
                 </div>`,
@@ -444,7 +462,7 @@ export const ObsidianFlavoredMarkdown: QuartzTransformerPlugin<Partial<Options> 
                 node.data = {
                   hProperties: {
                     ...(node.data?.hProperties ?? {}),
-                    className: `callout ${collapse ? "is-collapsible" : ""} ${
+                    className: `callout ${calloutType} ${collapse ? "is-collapsible" : ""} ${
                       defaultState === "collapsed" ? "is-collapsed" : ""
                     }`,
                     "data-callout": calloutType,

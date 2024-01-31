@@ -2,7 +2,7 @@ Introduction to computer programming: CPU help is processing the computer progra
 
 ## Programming Languages 
 
-We need language to communicate with a computer too! A ==[[#Computer Program/Application|computer program]]== is a set of instructions written in a programming language that tells a computer what tasks to perform. 
+We need language to communicate with a computer too! A [[#Computer Program/Application|computer program]] is a set of instructions written in a programming language that tells a computer what tasks to perform. 
 Programming language are set of rules that consist of instructions for computers. There are many programming languages like [[#C++]], Java, [[#Python|python]], JavaScript, Go, [[Verilog Basic|Verilog]] etc.
 ### Python 
 Python is a high-level, general-purpose [[#Programming Languages|programming language]]. It emphasizes code readability using significant indentation.

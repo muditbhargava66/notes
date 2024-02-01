@@ -6,7 +6,11 @@ export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
   footer: Component.Footer({
-    links: {
+    links: { 
+      "LinkedIn": "https://www.linkedin.com/in/mudit-b07/",
+      "GitHub": "https://github.com/muditbhargava66",
+      "Instagram": "https://www.instagram.com/mudit_bhargava_/",
+      "Google scholar": "https://scholar.google.com/citations?user=PQ0jMyMAAAAJ&hl=en",
     },
   }),
 }
@@ -69,7 +73,5 @@ export const defaultListPageLayout: PageLayout = {
           },
     })),
   ],
-  right: [
-  
-  ],
+  right: [],
 }

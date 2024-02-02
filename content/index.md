@@ -1,10 +1,12 @@
 ---
 title: Welcome! 👋
+description: 
+date: 
 draft: false
-tags:
-  - 
+tags: 
+aliases:
 ---
-
+ 
 I am Mudit Bhargava, a graduate student pursuing M.S. in Electrical and Computer Engineering at New York University (NYU). I have over 4 years of research experience working on embedded systems, robotics, and hardware security research.
 
 ## Education

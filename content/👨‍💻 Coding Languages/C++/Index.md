@@ -1,6 +1,8 @@
 ---
+date: 
 draft: true
 tags: 
+aliases:  
 longform:
   format: scenes
   title: C++

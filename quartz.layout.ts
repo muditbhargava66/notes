@@ -44,7 +44,14 @@ export const defaultContentPageLayout: PageLayout = {
   ],
   right: [
     Component.MobileOnly(Component.Explorer()),
-    Component.Graph(),
+    Component.Graph({
+      localGraph: {
+        showTags: false,
+      },
+      globalGraph: {
+        showTags: false,
+      },
+    }),
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Backlinks(),
   ],

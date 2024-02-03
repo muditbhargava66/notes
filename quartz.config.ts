@@ -3,21 +3,21 @@ import * as Plugin from "./quartz/plugins"
 
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "Mudit's Notes",
+    pageTitle: "Mudit B.",
     enableSPA: true,
     enablePopovers: true,
     analytics: {
       provider: "plausible",
     },
     baseUrl: "muditbhargava66.github.io/notes/",
-    ignorePatterns: ["private", "templates", ".obsidian"],
+    ignorePatterns: ["private", "templates"],
     defaultDateType: "created",
     theme: {
       typography: {
         // Overridden in custom.scss
-        header: "Lora",
-        body: "Lora",
-        code: "Inconsolata",
+        header: "DM Serif Text",
+        body: "Bricolage Grotesque",
+        code: "JetBrains Mono",
       },
       colors: {
         lightMode: {
@@ -52,6 +52,7 @@ const config: QuartzConfig = {
         // if you do rely on git for dates, ensure defaultDateType is 'modified'
         priority: ["frontmatter", "filesystem"],
       }),
+      Plugin.Poetry(),
       Plugin.Latex({ renderEngine: "katex" }),
       Plugin.SyntaxHighlighting(),
       Plugin.ObsidianFlavoredMarkdown({ enableInHtmlEmbed: false }),

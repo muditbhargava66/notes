@@ -4,15 +4,18 @@
 
 // Custom font
 :root {
-    --headerFont: "Schibsted Grotesk", !important;
-    --bodyFont: "Source Sans Pro", !important;
-    --codeFont: "Computer Modern Typewriter", monospace !important;
+    --headerFont: "DM Serif Text", !important;
+    --bodyFont: "Bricolage Grotesque", !important;
+    --codeFont: "JetBrains Mono", monospace !important;
 }
 
+
 // Remove internal link highlight
+/*
 a.internal {
     background-color: transparent;
 }
+*/
 
 // Make table of contents taller
 ul.overflow, ol.overflow {
@@ -51,4 +54,20 @@ table>* {
     line-height: 1.6rem;
 }
 
+pre.poetry {
+    font-size: 1.2rem;
+    font-family: biro_script_standardRgus;
+    border: none;
+    padding: 0;
+    position: unset;
+  }
+
+.meta,
+.content-meta {
+  font-family: biro_script_standardRgus, var(--bodyFont);
+}
+
+audio::-webkit-media-controls-panel {
+  background-color: var(--lightgray);
+}
 // Note: disabling custom selection color is done in base.scss

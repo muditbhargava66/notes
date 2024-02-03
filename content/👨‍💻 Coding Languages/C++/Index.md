@@ -2,7 +2,7 @@
 date: 
 draft: true
 tags: 
-aliases:  
+aliases: 
 longform:
   format: scenes
   title: C++

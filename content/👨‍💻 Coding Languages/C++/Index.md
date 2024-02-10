@@ -15,6 +15,10 @@ longform:
     - 4. Variables and Datatypes
     - 5. Operators and Expression
     - 6. Conditional Statements
+    - 7. Loops
+    - 8. Functions
   sceneTemplate: Templates/Chapter.md
-  ignoredFiles: []
+  ignoredFiles:
+    - "7."
+    - Untitled
 ---

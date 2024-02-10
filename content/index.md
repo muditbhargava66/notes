@@ -7,12 +7,13 @@ tags:
 aliases:
 ---
 <center> 
-<b>Mudit Bhargava</b>
+<b> Mudit Bhargava</b>
 </center>
 
 ```poetry
 Welcome to my website and digital garden!
 ```
+
 I am an electrical and computer engineering professional with expertise in embedded systems, robotics, and hardware security. Please feel free to get in touch using the contact form below.
 
 ## Background

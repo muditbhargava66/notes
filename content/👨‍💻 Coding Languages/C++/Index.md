@@ -17,8 +17,12 @@ longform:
     - 6. Conditional Statements
     - 7. Loops
     - 8. Functions
+    - 9. Pointers
+    - 10. Array
   sceneTemplate: Templates/Chapter.md
   ignoredFiles:
     - "7."
+    - Untitled
+    - Untitled
     - Untitled
 ---

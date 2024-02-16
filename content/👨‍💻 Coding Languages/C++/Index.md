@@ -19,9 +19,17 @@ longform:
     - 8. Functions
     - 9. Pointers
     - 10. Array
+    - 11. Sorting
+    - 12. Character Arrays and Strings
+    - 13. Pointers & Arrays
+    - 14. Maths and Problems
   sceneTemplate: Templates/Chapter.md
   ignoredFiles:
     - "7."
+    - Untitled
+    - Untitled
+    - Untitled
+    - 12. Sorting
     - Untitled
     - Untitled
     - Untitled

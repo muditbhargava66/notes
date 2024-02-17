@@ -1,5 +1,5 @@
 ---
-date: 
+date: 2024-02-17
 draft: true
 tags: 
 aliases: 
@@ -33,4 +33,5 @@ longform:
     - Untitled
     - Untitled
     - Untitled
+    - manuscript
 ---

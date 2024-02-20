@@ -23,15 +23,9 @@ longform:
     - 12. Character Arrays and Strings
     - 13. Pointers & Arrays
     - 14. Maths and Problems
+    - 15. Custom Datatypes
   sceneTemplate: Templates/Chapter.md
   ignoredFiles:
-    - "7."
-    - Untitled
-    - Untitled
-    - Untitled
-    - 12. Sorting
-    - Untitled
-    - Untitled
-    - Untitled
     - manuscript
+    - Untitled
 ---

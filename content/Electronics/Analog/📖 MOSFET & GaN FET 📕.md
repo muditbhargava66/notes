@@ -1,3 +1,12 @@
+---
+title: 📖 MOSFET & GaN FET 📕
+date: 2024-05-16
+Version: 
+description: 
+tags:
+  - Hardware
+draft:
+---
 ## Chapter 1: Understanding power MOSFET data sheet parameters
 
 This chapter provides a comprehensive guide to understanding the parameters in a power MOSFET datasheet. It aims to assist engineers in selecting the most suitable device for their specific applications. The chapter emphasizes the importance of paying attention to the conditions under which parameters are listed, as these can vary among suppliers and affect the interpretation of device capabilities.

@@ -1,10 +1,11 @@
 ---
-title: '"Behavioral Interview Sample Questions"'
+title: Behavioral Interview Sample Questions
 date: 2024-05-03
 Version: 
 description: 
 tags:
   - Interview
+draft:
 ---
 # BEHAVIORAL QUESTIONS 
 

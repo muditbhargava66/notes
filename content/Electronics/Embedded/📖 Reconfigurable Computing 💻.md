@@ -1,5 +1,5 @@
 ---
-title: '"📖 Reconfigurable Computing"'
+title: 📖 Reconfigurable Computing
 date: 2024-05-16
 Version: 
 description: 

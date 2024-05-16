@@ -1,5 +1,5 @@
 ---
-title: '"Embedded Linux systems"'
+title: Embedded Linux systems
 date: 2024-03-01
 Version: 
 description: 

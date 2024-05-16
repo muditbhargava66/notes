@@ -1,5 +1,5 @@
 ---
-title: '"📖 Operating Systems 🐧"'
+title: 📖 Operating Systems 🐧
 date: 2024-05-15
 Version: 
 description: 

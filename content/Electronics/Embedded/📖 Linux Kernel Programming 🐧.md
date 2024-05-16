@@ -1,5 +1,5 @@
 ---
-title: '"📖 Linux Kernel Programming 🐧"'
+title: 📖 Linux Kernel Programming 🐧
 date: 2024-05-15
 Version: 
 description: 

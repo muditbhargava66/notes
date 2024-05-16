@@ -1,11 +1,12 @@
 ---
-title: '"Interview Digital IC"'
+title: Interview Digital IC
 date: 2024-04-15
 Version: 
 description: 
 tags:
   - Interview
   - Hardware
+draft:
 ---
 # FPGA and ASIC Design Principles ✨
 ---

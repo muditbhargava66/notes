@@ -1,3 +1,11 @@
+---
+title: '"Embedded Linux systems"'
+date: 2024-03-01
+Version: 
+description: 
+tags: 
+draft: true
+---
 1. Real-Time Systems
     - Hard Real-Time Systems
         - Systems where missing a deadline can cause catastrophic failure

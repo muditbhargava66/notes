@@ -1,76 +1,71 @@
 ---
-title: Welcome! 👋
-description: 
+title: Mudit's Notes 📝
+description: A collection of technical notes on electronics, programming, and computer science.
 date: 
 draft: false
 tags: 
 aliases:
 ---
-<center> 
-<b> Mudit Bhargava</b>
+
+<div class="welcome-section">
+
+# Welcome to My Digital Garden 🌱
+
+<p class="subtitle">A curated collection of technical notes from my learning journey</p>
+
+</div>
+
+<a href="https://muditbhargava66.github.io/" class="back-to-portfolio">← Back to Portfolio</a>
+
+---
+
+## 📚 Browse by Category
+
+<div class="category-cards">
+
+<a href="./👨‍💻-Coding-Languages" class="category-card">
+<h3>💻 Coding Languages</h3>
+<p>Python, C, Verilog, SystemVerilog & more</p>
+</a>
+
+<a href="./Electronics" class="category-card">
+<h3>⚡ Electronics</h3>
+<p>Analog, Digital, Verification, PCB Design</p>
+</a>
+
+<a href="./Data-Structures" class="category-card">
+<h3>🏗️ Data Structures</h3>
+<p>Arrays, Trees, Graphs, Algorithms</p>
+</a>
+
+</div>
+
+---
+
+## 🎯 About These Notes
+
+These notes represent my learning journey through:
+
+- **Computer Architecture & VLSI** from NYU
+- **Hardware Security** research at NYU Center for Cyber Security
+- **Embedded Systems & Robotics** from research positions
+- **Personal projects** and self-study
+
+Feel free to explore using the **Explorer** on the left or the **Search** function above!
+
+---
+
+## 🔗 Quick Links
+
+| Resource | Description |
+|----------|-------------|
+| [Portfolio](https://muditbhargava66.github.io/) | My main website with projects and publications |
+| [GitHub](https://github.com/muditbhargava66) | Open source projects and contributions |
+| [LinkedIn](https://www.linkedin.com/in/mudit-b07/) | Professional network and experience |
+| [Google Scholar](https://scholar.google.com/citations?user=PQ0jMyMAAAAJ&hl=en) | Research publications |
+
+---
+
+<center>
+<i>These notes are works in progress and are updated regularly.</i>
 </center>
-
-```poetry
-Welcome to my website and digital garden!
-```
-
-I am an electrical and computer engineering professional with expertise in embedded systems, robotics, and hardware security. Please feel free to get in touch using the contact form below.
-
-## Background
-
-I have an M.S. in Electrical and Computer Engineering from New York University (NYU), where I focused on computer architecture, VLSI, DSP, analog IC design, hardware security, and reinforcement learning. I also have a B.Tech in Mechatronics from SRM Institute of Science and Technology.
-
-Over the past 3 years, I have gained experience in embedded systems, robotics, and hardware security through research positions and projects. Some highlights:
-
-- Hardware trojan research at the NYU Center for Cyber Security [US]
-- Side-channel analysis and detection
-- Mentor for Undergraduate Summer Research Program at NYU [US]
-- Teaching assistant for the computer architecture course at NYU [US]
-- Embedded systems and Swarm robotics research at the Autonomous Systems Lab [India]
-- Internships at BHEL and Bosch Rexroth [India]
-
-## Contact
-
-I'm currently seeking full-time positions in hardware engineering, including RTL design, verification, prototyping, and more. Please use the form below to connect with me about opportunities and potential collaborations.
-
-<center><form
-  action="https://formsubmit.co/muditbhargava666@gmail.com"
-  method="POST">
-
-  <label style="display:block;">
-    <span style="font-weight: bold;">Name *</span><br>
-    <input 
-      type="text"
-      name="name"
-      placeholder="Your name"   
-      required
-      style="min-width: 200px;"
-    >
-  </label><br>
-  <label style="display:block;">
-    <span style="font-weight: bold;">Email *</span><br>
-    <input
-      type="email"   
-      name="email"
-      placeholder="Your email"  
-      required
-      style="min-width: 200px;"
-    >
-  </label><br>
-  <label style="display:block;">
-    <span style="font-weight: bold;">Message *</span><br>
-    <textarea
-      name="message"
-      placeholder="Your message"
-      required
-      style="min-width: 200px; min-height: 100px; line-height: 15px; vertical-align: top; text-align: start;"   
-    ></textarea>
-  </label><br>
-  <button
-    type="submit"
-    style="display: block; margin: auto;"  
-  >
-    Send
-  </button>
-
-</form></center>

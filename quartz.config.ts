@@ -22,33 +22,33 @@ const config: QuartzConfig = {
       fontOrigin: "googleFonts",
       cdnCaching: true,
       typography: {
-        // Overridden in custom.scss
-        header: "DM Serif Text",
-        body: "Bricolage Grotesque",
+        // Match main site fonts
+        header: "Roboto",
+        body: "Roboto",
         code: "JetBrains Mono",
       },
       colors: {
         lightMode: {
           light: "#ffffff",
-          lightgray: "#eeeeee",
-          gray: "#b8b8b8",
+          lightgray: "#f0f0f0",
+          gray: "#828282",
           darkgray: "#333333",
           dark: "#000000",
-          secondary: "#1646e3",
-          tertiary: "#1646e3",
-          highlight: "rgba(143, 159, 169, 0.15)",
-          textHighlight: "#fff23688",
+          secondary: "#B509AC",      // Main site purple accent
+          tertiary: "#B509AC",
+          highlight: "rgba(181, 9, 172, 0.08)",
+          textHighlight: "#B509AC33",
         },
         darkMode: {
-          light: "#161618",
-          lightgray: "#393639",
+          light: "#1C1C1D",           // Main site dark background
+          lightgray: "#2C3237",       // Main site code bg
           gray: "#646464",
-          darkgray: "#d4d4d4",
-          dark: "#ebebec",
-          secondary: "#7b97aa",
-          tertiary: "#84a59d",
-          highlight: "rgba(143, 159, 169, 0.15)",
-          textHighlight: "#b3aa0288",
+          darkgray: "#E8E8E8",        // Main site text color
+          dark: "#E8E8E8",
+          secondary: "#2698BA",       // Main site cyan accent
+          tertiary: "#2698BA",
+          highlight: "rgba(38, 152, 186, 0.15)",
+          textHighlight: "#2698BA33",
         },
       },
     },
@@ -73,7 +73,7 @@ const config: QuartzConfig = {
       Plugin.TableOfContents(),
       Plugin.CrawlLinks({ markdownLinkResolution: "shortest" }),
       Plugin.Description(),
-      Plugin.Latex({ renderEngine: "katex" }),
+      // Removed duplicate Plugin.Latex() for faster builds
     ],
     filters: [Plugin.RemoveDrafts()],
     emitters: [
@@ -90,7 +90,6 @@ const config: QuartzConfig = {
       Plugin.Static(),
       Plugin.Favicon(),
       Plugin.NotFoundPage(),
-      // Comment out CustomOgImages to speed up build time
       Plugin.CustomOgImages(),
     ],
   },

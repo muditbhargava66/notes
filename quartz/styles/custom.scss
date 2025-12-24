@@ -1,21 +1,13 @@
 @use "./base.scss";
 
-// put your custom CSS here!
+// Custom CSS to match main portfolio site styling
 
-// Custom font
+// Font matching with main site
 :root {
-    --headerFont: "DM Serif Text", !important;
-    --bodyFont: "Bricolage Grotesque", !important;
+    --headerFont: "Roboto", sans-serif !important;
+    --bodyFont: "Roboto", sans-serif !important;
     --codeFont: "JetBrains Mono", monospace !important;
 }
-
-
-// Remove internal link highlight
-/*
-a.internal {
-    background-color: transparent;
-}
-*/
 
 // Make table of contents taller
 ul.overflow, ol.overflow {
@@ -29,14 +21,13 @@ img {
     margin-right: auto;
 }
 
-// Disable hyphens
+// Disable hyphens for cleaner text
 p, ul, text, a, tr, td, li, ol, ul {
     hyphens: none;
     -webkit-hyphens: none;
 }
 
 // Edge case for multiline explorer folders
-// Aline arrow to first line of text instead of center
 .folder-container {
     align-items: start !important;
 }
@@ -54,20 +45,91 @@ table>* {
     line-height: 1.6rem;
 }
 
+// Poetry block styling
 pre.poetry {
     font-size: 1.2rem;
     font-family: biro_script_standardRgus;
     border: none;
     padding: 0;
     position: unset;
-  }
+}
 
 .meta,
 .content-meta {
-  font-family: biro_script_standardRgus, var(--bodyFont);
+    font-family: biro_script_standardRgus, var(--bodyFont);
 }
 
+// Audio controls styling
 audio::-webkit-media-controls-panel {
-  background-color: var(--lightgray);
+    background-color: var(--lightgray);
 }
-// Note: disabling custom selection color is done in base.scss
+
+// Category cards for landing page
+.category-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.category-card {
+    background: var(--lightgray);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    text-decoration: none;
+    color: var(--darkgray);
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.category-card:hover {
+    border-color: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.category-card h3 {
+    margin: 0 0 0.3rem 0;
+    font-size: 1.1rem;
+    color: var(--dark);
+}
+
+.category-card p {
+    margin: 0;
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+// Back to portfolio button
+.back-to-portfolio {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--secondary);
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: opacity 0.2s ease;
+}
+
+.back-to-portfolio:hover {
+    opacity: 0.85;
+}
+
+// Welcome section styling
+.welcome-section {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.welcome-section h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.welcome-section .subtitle {
+    color: var(--gray);
+    font-size: 1.1rem;
+}

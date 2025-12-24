@@ -13,6 +13,11 @@ export default ((opts?: Options) => {
     const links = opts?.links ?? []
     return (
       <footer class={`${displayClass ?? ""}`}>
+        <p style={{ marginBottom: "0.5rem" }}>
+          <a href="https://muditbhargava66.github.io/" style={{ fontWeight: 500 }}>
+            ← Back to Portfolio
+          </a>
+        </p>
         <p>
           {i18n(cfg.locale).components.footer.createdWith}{" "}
           <a href="https://quartz.jzhao.xyz/">Quartz v{version}</a> © {year}

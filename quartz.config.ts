@@ -14,6 +14,7 @@ const config: QuartzConfig = {
     analytics: {
       provider: "plausible",
     },
+    locale: "en-US",
     baseUrl: "muditbhargava66.github.io/notes/",
     ignorePatterns: ["private", "templates"],
     defaultDateType: "created",

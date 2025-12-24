@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-preview:
-    if: ${{ github.repository == 'muditbhargava66/notes' }}
+    if: ${{ github.repository == 'jackyzha0/quartz' }}
     runs-on: ubuntu-latest
     name: Build Preview
     steps:

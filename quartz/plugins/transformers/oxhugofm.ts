@@ -27,16 +27,18 @@ const defaultOptions: Options = {
 const relrefRegex = new RegExp(/\[([^\]]+)\]\(\{\{< relref "([^"]+)" >\}\}\)/, "g")
 const predefinedHeadingIdRegex = new RegExp(/(.*) {#(?:.*)}/, "g")
 const hugoShortcodeRegex = new RegExp(/{{(.*)}}/, "g")
-const figureTagRegex = new RegExp(/< ?figure src="(.*)" ?>/, "g")
-// \\\\\( -> matches \\(
+const figureTagRegex = new RegExp(/<figure src="(.*)" ?>/, "g")
+// \\\\\\( -> matches \\(
 // (.+?) -> Lazy match for capturing the equation
-// \\\\\) -> matches \\)
-const inlineLatexRegex = new RegExp(/\\\\\((.+?)\\\\\)/, "g")
-// (?:\\begin{equation}|\\\\\(|\\\\\[) -> start of equation
-// ([\s\S]*?) -> Matches the block equation
-// (?:\\\\\]|\\\\\)|\\end{equation}) -> end of equation
+// \\\\\\) -> matches \\)
+const inlineLatexRegex = new RegExp(/\\\\\\((.+?)\\\\\\)/, "g")
+// (?:\\begin{...}|\\\\\\(|\\\\\\[) -> start of equation (supports multiple environments)
+// ([\\s\\S]*?) -> Matches the block equation
+// (?:\\\\\\]|\\\\\\)|\\end{...}) -> end of equation
+// Supported environments: equation, equation*, align, align*, gather, gather*, multline, multline*, split
+const mathEnvironments = "equation\\*?|align\\*?|gather\\*?|multline\\*?|split"
 const blockLatexRegex = new RegExp(
-  /(?:\\begin{equation}|\\\\\(|\\\\\[)([\s\S]*?)(?:\\\\\]|\\\\\)|\\end{equation})/,
+  `(?:\\\\begin{(${mathEnvironments})}|\\\\\\\\\\(|\\\\\\\\\\[)([\\s\\S]*?)(?:\\\\\\\\\\]|\\\\\\\\\\)|\\\\end{(${mathEnvironments})})`,
   "g",
 )
 // \$\$[\s\S]*?\$\$ -> Matches block equations
@@ -92,8 +94,13 @@ export const OxHugoFlavouredMarkdown: QuartzTransformerPlugin<Partial<Options>> 
           const [eqn] = capture
           return `$${eqn}$`
         })
-        src = src.replaceAll(blockLatexRegex, (_value, ...capture) => {
-          const [eqn] = capture
+        // Updated to handle multiple capture groups from the new regex
+        src = src.replaceAll(blockLatexRegex, (_value, startEnv, eqn, endEnv) => {
+          // If we matched a \begin{env}...\end{env} pattern, preserve the environment
+          if (startEnv && endEnv) {
+            return `$$\\begin{${startEnv}}${eqn}\\end{${endEnv}}$$`
+          }
+          // For \\( \\) or \\[ \\] patterns, just wrap in $$
           return `$$${eqn}$$`
         })
 

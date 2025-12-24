@@ -22,6 +22,13 @@ interface Options {
   openLinksInNewTab: boolean
   lazyLoad: boolean
   externalLinkIcon: boolean
+  /** 
+   * If true, links that cannot be resolved to an existing page will be rendered 
+   * as disabled (no href) with a "broken" class. This is checked AFTER applying
+   * the markdownLinkResolution strategy, so short links like [[note]] will be
+   * correctly resolved before checking if they exist.
+   */
+  disableBrokenLinks: boolean
 }
 
 const defaultOptions: Options = {
@@ -30,6 +37,7 @@ const defaultOptions: Options = {
   openLinksInNewTab: false,
   lazyLoad: false,
   externalLinkIcon: true,
+  disableBrokenLinks: false,
 }
 
 export const CrawlLinks: QuartzTransformerPlugin<Partial<Options>> = (userOpts) => {
@@ -123,6 +131,21 @@ export const CrawlLinks: QuartzTransformerPlugin<Partial<Options>> = (userOpts) 
                   const simple = simplifySlug(full)
                   outgoing.add(simple)
                   node.properties["data-slug"] = full
+
+                  // Check if link destination exists - this happens AFTER resolution
+                  // so short links like [[note]] are correctly resolved first
+                  if (opts.disableBrokenLinks) {
+                    const linkExists = ctx.allSlugs.some((slug) => {
+                      const simpleSlug = simplifySlug(slug)
+                      return simpleSlug === simple || slug === full
+                    })
+                    if (!linkExists) {
+                      classes.push("broken")
+                      // Remove href to disable the link
+                      delete node.properties.href
+                      delete node.properties["data-slug"]
+                    }
+                  }
                 }
 
                 // rewrite link internals if prettylinks is on

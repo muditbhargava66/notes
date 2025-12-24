@@ -268,19 +268,28 @@ export const ObsidianFlavoredMarkdown: QuartzTransformerPlugin<Partial<Options>>
                     return {
                       type: "html",
                       data: { hProperties: { transclude: true } },
-                      value: `<blockquote class="transclude" data-url="${url}" data-block="${block}" data-embed-alias="${alias}"><a href="${
-                        url + anchor
-                      }" class="transclude-inner">Transclude of ${url}${block}</a></blockquote>`,
+                      value: `<blockquote class="transclude" data-url="${url}" data-block="${block}" data-embed-alias="${alias}"><a href="${url + anchor
+                        }" class="transclude-inner">Transclude of ${url}${block}</a></blockquote>`,
                     }
                   }
 
                   // otherwise, fall through to regular link
                 }
 
-                // treat as broken link if slug not in ctx.allSlugs
+                // DEPRECATED: disableBrokenWikilinks is now handled by CrawlLinks.disableBrokenLinks
+                // which properly applies the link resolution strategy before checking if links exist.
+                // This old implementation incorrectly marked short links like [[note]] as broken
+                // because it didn't account for the resolution strategy.
+                // For backward compatibility, we still check but recommend using CrawlLinks instead.
                 if (opts.disableBrokenWikilinks) {
+                  // Note: This check is deprecated and may not work correctly with short links.
+                  // Use CrawlLinks({ disableBrokenLinks: true }) instead for proper resolution.
                   const slug = slugifyFilePath(fp as FilePath)
-                  const exists = ctx.allSlugs && ctx.allSlugs.includes(slug)
+                  // Improved check: also look for partial matches (short link resolution)
+                  const exists = ctx.allSlugs && (
+                    ctx.allSlugs.includes(slug) ||
+                    ctx.allSlugs.some(s => s.endsWith("/" + slug) || s === slug)
+                  )
                   if (!exists) {
                     return {
                       type: "html",

@@ -25,8 +25,16 @@ export default (() => {
     const url = new URL(`https://${cfg.baseUrl ?? "example.com"}`)
     const path = url.pathname as FullSlug
     const baseDir = fileData.slug === "404" ? path : pathToRoot(fileData.slug!)
+    const iconPath = joinSegments(baseDir, "static/icon.png")
 
-    const fontStylePath = joinSegments(baseDir, "static/font/cmun.css")
+    // Url of current page
+    const socialUrl =
+      fileData.slug === "404" ? url.toString() : joinSegments(url.toString(), fileData.slug!)
+
+    const usesCustomOgImage = ctx.cfg.plugins.emitters.some(
+      (e) => e.name === CustomOgImagesEmitterName,
+    )
+    const ogImageDefaultPath = `https://${cfg.baseUrl}/static/og-image.png`
 
     return (
       <head>
@@ -52,16 +60,33 @@ export default (() => {
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta property="og:description" content={description} />
-        <meta property="og:width" content="1200" />
-        <meta property="og:height" content="675" />
+        <meta property="og:image:alt" content={description} />
+
+        {!usesCustomOgImage && (
+          <>
+            <meta property="og:image" content={ogImageDefaultPath} />
+            <meta property="og:image:url" content={ogImageDefaultPath} />
+            <meta name="twitter:image" content={ogImageDefaultPath} />
+            <meta
+              property="og:image:type"
+              content={`image/${getFileExtension(ogImageDefaultPath) ?? "png"}`}
+            />
+          </>
+        )}
+
+        {cfg.baseUrl && (
+          <>
+            <meta property="twitter:domain" content={cfg.baseUrl}></meta>
+            <meta property="og:url" content={socialUrl}></meta>
+            <meta property="twitter:url" content={socialUrl}></meta>
+          </>
+        )}
+
+        <link rel="icon" href={iconPath} />
         <meta name="description" content={description} />
         <meta name="generator" content="Quartz" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link href={fontStylePath} rel="stylesheet" type="text/css" spa-preserve />
-        {css.map((href) => (
-          <link key={href} href={href} rel="stylesheet" type="text/css" spa-preserve />
-        ))}
+
+        {css.map((resource) => CSSResourceToStyleElement(resource, true))}
         {js
           .filter((resource) => resource.loadTime === "beforeDOMReady")
           .map((res) => JSResourceToScriptElement(res, true))}
